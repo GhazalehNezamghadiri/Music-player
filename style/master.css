@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+
+body {
+    background-color: #161417;
+    font-family: "Montserrat", sans-serif;
+}
+
+.sideHide {
+    transform: translateX(-100%);
+
+
+}
+
+.swiper-slide {
+    &:hover {
+        background-color: rgb(80, 75, 75);
+        transition: .4s;
+    }
+}
+  

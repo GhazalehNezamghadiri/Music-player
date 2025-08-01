@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="style/output.css">
+    <link rel="stylesheet" href="css/fontello.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+
+    <style>
+        body {
+            >.myfoot {
+                width: 120px;
+                height: 120px;
+                position: fixed;
+                bottom: 50px;
+                right: 25px;
+                /* border: 1px solid black; */
+
+                &:hover {
+
+                    >img,
+                    &::before {
+                        animation-play-state: paused;
+                    }
+                
+                    >a {
+                        right: 100%;
+                        opacity: 1;
+                    }
+                }
+
+                &::before {
+                    content: '';
+                    display: flex;
+                    position: absolute;
+                    width: 100px;
+                    height: 100px;
+                    top: 10px;
+                    left: 25px;
+                    background-color: rgba(236, 219, 197, 0.904);
+                    animation: foot1 linear infinite alternate 6s;
+                    z-index: -10;
+
+                }
+
+                >img {
+                    width: 90px;
+                    height: 90px;
+                    object-fit: cover;
+                    animation: foot2 linear infinite alternate 6s;
+                    position: absolute;
+                    top: 18px;
+                    right: 1px;
+                }
+
+                >a {
+
+                    position: absolute;
+                    right: 100px;
+                    z-index: -9;
+                    right: 50%;
+                    font-size: 30px;
+                    color: rgb(226, 215, 202);
+                    transition: .4s;
+                    opacity: 0;
+
+                    &:nth-of-type(1) {
+                        top: 0;
+                        font-size: 28px;
+                    }
+
+                    &:nth-of-type(2) {
+                        top: 28%;
+                        font-size: 28px;
+                        transition-delay: .1s;
+                    }
+
+                    &:nth-of-type(3) {
+                        top: 56%;
+                        font-size: 31px;
+                        transition-delay: .2s;
+                    }
+
+                    &:nth-of-type(4) {
+                        top: 84%;
+                        font-size: 22px;
+                        transition-delay: .3s;
+
+                    }
+
+
+
+                }
+
+
+            }
+        }
+
+        .mySwiper {
+            width: 1100px;
+            height: auto;
+            overflow-x: scroll;
+        }
+
+        .swiper-wrapper {
+            display: grid !important;
+            grid-template-rows: repeat(3, auto);
+            grid-auto-flow: column;
+            gap: 1rem;
+            height: 300px;
+
+        }
+
+        .swiper-slide {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            color: white;
+        }
+
+        .swiper-scrollbar {
+            background: rgba(255, 255, 255, 0.1);
+            height: 6px;
+            border-radius: 3px;
+        }
+
+        @keyframes foot1 {
+            0% {
+                border-radius: 37% 63% 41% 59% / 56% 34% 66% 44%;
+            }
+
+            50% {
+                border-radius: 64% 36% 63% 37% / 37% 59% 41% 63%;
+            }
+
+            100% {
+                border-radius: 30% 70% 51% 49% / 62% 41% 59% 38%;
+            }
+        }
+
+        @keyframes foot2 {
+            0% {
+                border-radius: 30% 70% 51% 49% / 62% 41% 59% 38%;
+            }
+
+            50% {
+                border-radius: 37% 63% 41% 59% / 56% 34% 66% 44%;
+            }
+
+            100% {
+                border-radius: 64% 36% 63% 37% / 37% 59% 41% 63%;
+            }
+        }
+    </style>
+
+
+</head>
+
+<body class="overflow-x-hidden ">
+
+    <aside id="leftSide"
+        class="md:w-[20%] fixed transition-transform duration-300 ease-in transform h-screen text-white  bg-black/75 md:p-8 ">
+        <h2 class="md:text-2xl text-lg font-bold hidden lg:flex justify-end items-center mb-10 mt-2 md:mt-0">
+            <i class="icon-youtube bg-red-600 rounded-full "></i> Music
+        </h2>
+        <ul class="mt-15 md:mt-0">
+            <li class="block hover:bg-zinc-500 duration-300 p-5 rounded "><i class="md:mr-3 icon-home"></i>Home</li>
+            <li class="block hover:bg-zinc-500 duration-300 p-5 rounded "><i class="md:mr-3 icon-search-1"></i>Explore
+            </li>
+            <li class="block hover:bg-zinc-500 duration-300 p-5 rounded "><i class="md:mr-3  icon-library"></i>Library
+            </li>
+            <li class="block hover:bg-zinc-500 duration-300 p-5 rounded "><i
+                    class="md:mr-3 ph ph-arrows-clockwise "></i>Upgrade</li>
+        </ul>
+        <hr>
+        <h2 class=" font-bold md:text-2xl ml-2.5 mt-4"> Liked Songs</h2>
+
+        <div id="likeBox" class="text-white mt-4 *:py-4  max-h-60 overflow-y-auto  mb-7"></div>
+    </aside>
+
+
+    <main class="md:ml-[20%] ml-[30%]">
+
+        <div class=" fixed top-8 left-9 z-50 text-2xl text-white">
+            <i class="icon-menu md:mx-5 cursor-pointer"></i>
+        </div>
+
+
+        <section class="md:px-15 px-8 md:w-full  ">
+
+
+            <div class="flex items-center border border-gray-300 text-white rounded-xl w-[80%] mb-8 mt-3  bg-black/50">
+                <button class="px-4 py-2  cursor-pointer" id="searchBtn">
+                    <i class="icon-search text-white/40 text-xl"></i>
+                </button>
+                <input type="text" id="searchInput" placeholder="Search songs, ablums, artists, podcasts"
+                    class=" px-4 py-2 focus:outline-none w-full " />
+
+            </div>
+
+            <div class="flex gap-2">
+                <button
+                    class="bg-zinc-500 px-4 py-2 text-white rounded-xl text-sm hover:bg-zinc-400 duration-200 cursor-pointer">Podcasts</button>
+                <button
+                    class="bg-zinc-500 px-4 py-2 text-white rounded-xl text-sm hover:bg-zinc-400 duration-200 cursor-pointer">Workout</button>
+                <button
+                    class="bg-zinc-500 px-4 py-2 text-white rounded-xl text-sm hover:bg-zinc-400 duration-200 cursor-pointer">Energize</button>
+                <button
+                    class="bg-zinc-500 px-4 py-2 text-white rounded-xl text-sm hover:bg-zinc-400 duration-200 cursor-pointer">Relax</button>
+                <button
+                    class="bg-zinc-500 px-4 py-2 text-white rounded-xl text-sm hover:bg-zinc-400 duration-200 cursor-pointer">Feel
+                    good</button>
+                <button
+                    class="bg-zinc-500 px-4 py-2 text-white rounded-xl text-sm hover:bg-zinc-400 duration-200 cursor-pointer">Commute</button>
+                <button
+                    class="bg-zinc-500 px-4 py-2 text-white rounded-xl text-sm hover:bg-zinc-400 duration-200 cursor-pointer">Party</button>
+                <button
+                    class="bg-zinc-500 px-4 py-2 text-white rounded-xl text-sm hover:bg-zinc-400 duration-200 cursor-pointer">Romance</button>
+                <button
+                    class="bg-zinc-500 px-4 py-2 text-white rounded-xl text-sm hover:bg-zinc-400 duration-200 cursor-pointer">Sad</button>
+                <button
+                    class="bg-zinc-500 px-4 py-2 text-white rounded-xl text-sm hover:bg-zinc-400 duration-200 cursor-pointer">Focus</button>
+                <button
+                    class="bg-zinc-500 px-4 py-2 text-white rounded-xl text-sm hover:bg-zinc-400 duration-200 cursor-pointer">Sleep</button>
+            </div>
+
+
+            <div class=" mt-10">
+                <h2 class="md:text-lg font-semibold mb-4 text-white/90">MUSIC TO GET YOU STARTED</h2>
+                <h3 class="md:text-2xl text-lg font-bold mb-6 text-white/95">Quick picks</h3>
+            </div>
+
+
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper" id="mysongs">
+                </div>
+
+            </div>
+        </section>
+
+
+        <div id="MiniBox"
+            class="fixed z-50 left-0 right-0  p-3 md:gap-x-6  gap-x-3  bottom-0 bg-zinc-800 text-white hidden ">
+
+            <div class="w-1/3  flex md:ml-5 md:gap-15 gap-3  ">
+                <button id="prevBtn" class="cursor-pointer">
+                    <i class="icon-to-start"> </i>
+
+                </button>
+                <button id="stopBtn" class="cursor-pointer text-2xl">
+                    <i class="icon-pause-2"></i>
+                </button>
+
+                <button id="nextBtn" class="cursor-pointer">
+                    <i class="icon-to-end"></i>
+                </button>
+            </div>
+
+            <div class="text-sm flex justify-center items-center lg:flex-wrap w-1/3 mx-1.5 gap-3">
+                <img id="MiniPic" class="w-14 h-14 object-cover ">
+                <div class="flex flex-col text-center md:text-left">
+                    <h3 id="MiniTitle" class="font-bold "></h3>
+                    <p id="MiniArtist" class="text-gray-600 font-semibold"></p>
+                </div>
+                <div class="lg:ml-10">
+                    <i id="likeBtn" class="text-xl cursor-pointer text-white/70 icon-heart-empty"></i>
+                </div>
+            </div>
+
+            <div class="flex items-center md:justify-end justify-center w-1/3 ">
+                <div class=" text-right">
+                    <input type="range" min="0" max="1" step="0.01" value="1" id="sound" class="h-0.5 w-[50%] ">
+                </div>
+                <i class="icon-volume md:text-xl text-md text-white/40 cursor-pointer" id="speaker"></i>
+            </div>
+            <i id="open" class="duration-300  icon-up-open-1  my-4 mr-2 text-white/70 cursor-pointer"></i>
+        </div>
+
+
+
+        <div id="fullPlayer" class="fixed top-0 left-0 w-full h-full bg-black z-50 hidden text-white ">
+            <div id="background" class="absolute h-full w-full -z-40 bg-cover bg-center blur-2xl opacity-20"></div>
+
+            <div class="flex flex-col items-center justify-center w-full h-[80%] md:h-screen md:w-2/3 p-6 *:py-4">
+                <img id="fullPic" class="w-96 h-96 object-cover rounded" />
+                <h2 id="fullTitle" class="text-xl font-bold"></h2>
+                <p id="fullArtist" class="text-sm text-gray-300"></p>
+                <input type="range" id="time" min="0" max="100" class="w-[50%] ">
+
+
+                <div class="flex items-center justify-center *:px-8 mt-6">
+                    <button id="fullPrevBtn" class="text-2xl cursor-pointer"><i class="icon-to-start"></i></button>
+                    <button id="fullStopBtn" class="text-2xl cursor-pointer"><i class="icon-pause-2"></i></button>
+                    <button id="fullNextBtn" class="text-2xl cursor-pointer"><i class="icon-to-end"></i></button>
+                </div>
+            </div>
+
+
+            <div id="fullList"
+                class="w-full h-[90%]  bg-black/25 md:w-1/3 p-4 md:right-0 md:top-5 md:absolute overflow-y-auto border-l cursor-pointer border-white/10">
+                <h3 class="text-lg font-bold mb-9  ">PlayList</h3>
+                <div id="fullSongList" class="*:py-5 ">
+
+                </div>
+            </div>
+
+            <i id="close" class=" icon-down-open-1 absolute bottom-5 right-5 text-white text-lg cursor-pointer"></i>
+        </div>
+        <h2 class="font-bold md:text-3xl text-white/85 mt-30 md:ml-[5%] ml-10">
+            From the community
+        </h2>
+
+
+        <div class="relative  text-white my-10  mx-8 ">
+            <button id="lefticon" class="cursor-pointer absolute top-20 hover:bg-white/50 duration-200 rounded-full "><i
+                    class=" icon-left-open-big text-3xl font-bold"></i></button>
+
+            <div id="boxScroll" class="*:shrink-0 flex flex-row *:mx-5 overflow-x-hidden scroll-smooth">
+
+                <div class="w-[200px] ">
+                    <img src="img/ai.jpg" class="object-cover w-44 h-44" alt="">
+                    <h3 class="font-bold mt-2">Ai</h3>
+                    <p class="text-white/55">Koorosh & Arta & Saaren</p>
+                </div>
+                <div class="w-[200px] ">
+                    <img src="img/arezom.jpg" class="object-cover w-44 h-44" alt="">
+                    <h3 class="font-bold mt-2">AREZOOM INE</h3>
+                    <p class="text-white/55">Young Sudden</p>
+                </div>
+                <div class="w-[200px] ">
+                    <img src="img/boome-naghashi.jpg" class="object-cover w-44 h-44" alt="">
+                    <h3 class="font-bold mt-2">Boome Naghashi</h3>
+                    <p class="text-white/55">Wantons</p>
+                </div>
+                <div class="w-[200px] ">
+                    <img src="img/kooh.jpg" class="object-cover w-44 h-44" alt="">
+                    <h3 class="font-bold mt-2">کوه باش و دل نبند</h3>
+                    <p class="text-white/55">he and his friends</p>
+                </div>
+                <div class="w-[200px] ">
+                    <img src="img/mama.jpg" class="object-cover w-44 h-44" alt="">
+                    <h3 class="font-bold mt-2">Mama</h3>
+                    <p class="text-white/55">Sijal</p>
+                </div>
+                <div class="w-[200px] ">
+                    <img src="img/pesare-bad.jpg" class="object-cover w-44 h-44" alt="">
+                    <h3 class="font-bold mt-2">Pesare Bad</h3>
+                    <p class="text-white/55">Sijal</p>
+                </div>
+                <div class="w-[200px] ">
+                    <img src="img/pure-love.jpeg" class="object-cover w-44 h-44" alt="">
+                    <h3 class="font-bold mt-2">Pure Love</h3>
+                    <p class="text-white/55">Arash</p>
+                </div>
+                <div class="w-[200px] ">
+                    <img src="img/Road-61.jpg" class="object-cover w-44 h-44" alt="">
+                    <h3 class="font-bold mt-2">Road 61</h3>
+                    <p class="text-white/55">PapaBoyz & Heliyom</p>
+                </div>
+                <div class="w-[200px] ">
+                    <img src="img/tocka.jpg" class="object-cover w-44 h-44" alt="">
+                    <h3 class="font-bold mt-2">Tocka</h3>
+                    <p class="text-white/55">Naaji</p>
+                </div>
+                <div class="w-[200px] ">
+                    <img src="img/Ye-Emshabo.webp" class="object-cover w-44 h-44" alt="">
+                    <h3 class="font-bold mt-2">Ye Emshabo</h3>
+                    <p class="text-white/55">Sepehr Khalse & Hooman</p>
+                </div>
+
+            </div>
+            <button id="righticon"
+                class="cursor-pointer absolute top-20 -right-4  hover:bg-white/50 duration-200 rounded-full"><i
+                    class="icon-right-open-big text-3xl font-bold"></i></button>
+
+        </div>
+    </main>
+
+
+
+
+
+
+
+    <figure class="myfoot">
+        <img src="img/ghazall.jfif" alt="">
+        <a href="https://www.linkedin.com/in/ghazaleh-nezamghadiri-06b626302/" target="_blank"><i
+                class="icon-icons8-linkedin"></i></a>
+        <a href="https://github.com/GhazalehNezamghadiri" target="_blank"><i class="icon-icons8-github"></i></a>
+        <a href="https://www.instagram.com/ghazale.ghadiri/?hl=en" target="_blank"><i
+                class=" icon-icons8-instagram"></i></a>
+        <a href="mailto:ghazalehghadiri2@gmail.com"><i class="icon-mail"></i></a>
+
+    </figure>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
